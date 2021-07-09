@@ -15,35 +15,23 @@ public:
     int findset(int i, int parent[]){
         if(parent[i]==-1)
             return i;
-        return findset(parent[i],parent);
+        return parent[i]=findset(parent[i],parent);
     }
     //DSU Union
-    void unionset(int x, int y, int parent[],int rank[]){
+    void unionset(int x, int y, int parent[]){
         int s1=findset(x,parent);
         int s2=findset(y,parent);
-        // if(s1!=s2){
-        //     parent[s2]=s1;
-        // }
         if(s1!=s2){
-            if(rank[s1]<rank[s2]){
-                parent[s1]=s2;
-                rank[s2]+= rank[s1];
-            }
-            else{
-                parent[s2]=s1;
-                rank[s1]+= rank[s2];
-            }
+            parent[s2]=s1;
         }
     }
 
     bool contain_cycle(){
         //DSU logic to check if graph is cyclic or not
         int *parent = new int[V];
-        int *rank =new int[V];
         for (int i = 0; i < V; i++)
         {
             parent[i]=-1;
-            rank[i]=1;
         }
         for(auto edge: l){
             int i=edge.first;
@@ -52,42 +40,30 @@ public:
             int s1=findset(i,parent);
             int s2= findset(j,parent);
             if(s1!=s2){
-                unionset(s1,s2,parent,rank);
+                unionset(s1,s2,parent);
             }
             else {
-                // cout<<"Same Parents"<<s1<<" and "<<s2<<endl;
                 cout<<"Index array"<<endl;
                 for (int i = 0; i < V; i++){
                     cout<<i<<" ";
                 }
                 cout<<endl;
-               cout<<"Parent array "<<endl;
+                cout<<"Parent array "<<endl;
                 for (int i = 0; i < V; i++){
                     cout<<parent[i]<<" ";
-                }
-                cout<<endl;
-                cout<<"Rank Array"<<endl;
-                for (int i = 0; i < V; i++){
-                    cout<<rank[i]<<" ";
                 }
                 cout<<endl;
                 return true;
             }
                 
         }
+        
         cout<<"Parent array "<<endl;
         for (int i = 0; i < V; i++){
             cout<<parent[i]<<" ";
         }
         cout<<endl;
-        cout<<"Rank Array"<<endl;
-        for (int i = 0; i < V; i++){
-            cout<<rank[i]<<" ";
-        }
-        cout<<endl;
-        
         delete[] parent;
-        delete[] rank;
         return false;
     }
 };
