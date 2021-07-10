@@ -46,6 +46,7 @@ class Graph{
         }
         return ans;
     }
+     
 };
 
 int main() {
@@ -63,6 +64,7 @@ int main() {
         g.addEdge(x-1,y-1,w);
     }
     cout<<g.prims_mst()<<endl;
+    
 return 0;
 }
 // Input:

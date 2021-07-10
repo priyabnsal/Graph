@@ -70,7 +70,7 @@ class Graph{
 };
 
 int main(){
-    Graph g(6);
+   /* Graph g(6);
     g.addEdge(0,1,1);
     g.addEdge(1,3,3);
     g.addEdge(3,2,4);
@@ -79,7 +79,26 @@ int main(){
     g.addEdge(1,2,2);
 
     cout<<g.Kruskal();
-
+*/
+ int n,m;
+    // cout<<"Enter No of nodes"<<endl;
+    cin>>n;
+    // cout<<"Enter no of edges"<<endl;
+    cin>>m;
+    Graph g(n);
+    // cout<<"Enter Node x and Y then weight"<<endl;
+    for (int i = 0; i < m; i++){
+        int x,y,w;
+        cin>>x>>y>>w;
+        g.addEdge(x-1,y-1,w);
+    }
+    cout<<g.Kruskal()<<endl;
     return 0;
     
 }
+// 4 5
+// 1 2 10
+// 2 3 15
+// 1 3 5 
+// 4 2 2 
+// 4 3 40
